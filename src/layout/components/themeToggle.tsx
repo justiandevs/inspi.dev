@@ -2,6 +2,7 @@
 
 import {ReactElement} from "react";
 import {useTheme} from "next-themes";
+import {FaSun, FaMoon} from "react-icons/fa";
 
 export const ThemeToggle = (): ReactElement => {
   const { systemTheme, theme, setTheme } = useTheme();
@@ -10,9 +11,9 @@ export const ThemeToggle = (): ReactElement => {
   return (
     <button
       onClick={() => theme === "dark" ? setTheme("light") : setTheme("dark")}
-      className="bg-yellow-400 dark:bg-yellow-900 p-4"
+      className="transition duration hover:text-indigo-700 hover:dark:text-indigo-400"
     >
-      Toggle Mode
+      {theme === "dark" ? <FaSun /> : <FaMoon />}
     </button>
   )
 }

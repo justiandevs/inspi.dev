@@ -1,6 +1,8 @@
 import {WorkInProgress} from "@/components/workInProgress";
 import {Footer} from "@/layout/footer";
 import {ReactElement} from "react";
+import Link from "next/link";
+import {Button} from "@/components/button";
 
 export default function Home(): ReactElement {
   return (
@@ -9,14 +11,24 @@ export default function Home(): ReactElement {
         <WorkInProgress />
           :
         <>
-          <h1>heading 1</h1>
-          <h2>heading 2</h2>
-          <h3>heading 3</h3>
-          <h4>heading 4</h4>
-          <h5>heading 6</h5>
-          <h6>heading 6</h6>
-          <a href="https://test.dev">test.dev</a>
-          <p>test</p>
+          <section className="bg-white dark:bg-zinc-800 py-16">
+            <div className="container-bsc flex flex-col gap-4">
+              <h1>Ran out of ideas as a developer?</h1>
+              <p className="text-xl">Get inspired by projects or ideas that were made by other developers and shared at Inspi.</p>
+              <div className="flex flex-row gap-4 mt-4">
+                <Button
+                  name="See projects"
+                  url="/projects"
+                  type="primary"
+                />
+                <Button
+                  name="Add project"
+                  url="/projects/add"
+                  type="secondary"
+                />
+              </div>
+            </div>
+          </section>
         </>
       }
     </main>

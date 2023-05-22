@@ -44,3 +44,20 @@ h6 {
 a, p {
     @apply text-base;
 }
+
+/* components */
+.button {
+    @apply transition duration-300;
+}
+
+.button.primary {
+    @apply bg-indigo-600 dark:bg-indigo-400 hover:bg-indigo-700 hover:dark:bg-indigo-500 text-white rounded-lg;
+}
+
+.button.secondary {
+    @apply hover:bg-gray-100 hover:dark:bg-zinc-900 rounded-lg;
+}
+
+.button.standard {
+    @apply p-4;
+}
