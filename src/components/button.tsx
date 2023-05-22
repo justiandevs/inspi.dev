@@ -5,17 +5,21 @@ interface IButton {
   url: string,
   name: string,
   type: "primary" | "secondary" | "danger",
-  size?: "small" | "standard" | "large"
+  size?: "small" | "standard" | "large",
+  form?: boolean,
+  stretch?: boolean
 }
 
 export const Button = ({
   url,
   name,
   type,
-  size = "standard"
+  size = "standard",
+  form = false,
+  stretch = false
 }: IButton): ReactElement => {
   return (
-    <Link href={url} className={`button ${type} ${size}`}>
+    <Link type="submit" href={url} className={`button ${type} ${size} ${stretch ? "w-full text-center" : ""}`}>
       {name}
     </Link>
   )
