@@ -3,9 +3,9 @@ import {Poppins} from 'next/font/google'
 import {Metadata} from "next";
 import {ReactNode} from "react";
 import {Providers} from "@/components/providers";
-import {Navigation} from "@/layout/navigation";
+import {Navigation} from "../layout/navigation";
 import {NextFont} from "next/dist/compiled/@next/font";
-import {Footer} from "@/layout/footer";
+import {Footer} from "../layout/footer";
 
 const poppins: NextFont = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"] })
 

@@ -1,8 +1,8 @@
 import {WorkInProgress} from "@/components/workInProgress";
-import {Footer} from "@/layout/footer";
+import {Footer} from "../layout/footer";
 import {ReactElement} from "react";
 import Link from "next/link";
-import {Button} from "@/components/button";
+import {Button} from "../components/button";
 
 export default function Home(): ReactElement {
   return (
