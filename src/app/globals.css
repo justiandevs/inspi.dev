@@ -51,7 +51,7 @@ a, p {
 }
 
 .button.primary {
-    @apply bg-indigo-600 dark:bg-indigo-400 hover:bg-indigo-700 hover:dark:bg-indigo-500 text-white rounded-lg;
+    @apply bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 hover:dark:bg-indigo-600 text-white rounded-lg;
 }
 
 .button.secondary {

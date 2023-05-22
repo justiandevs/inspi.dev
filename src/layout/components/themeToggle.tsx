@@ -11,7 +11,7 @@ export const ThemeToggle = (): ReactElement => {
   return (
     <button
       onClick={() => theme === "dark" ? setTheme("light") : setTheme("dark")}
-      className="transition duration hover:text-indigo-700 hover:dark:text-indigo-400"
+      className="transition duration hover:text-indigo-700 hover:dark:text-indigo-500"
     >
       {theme === "dark" ? <FaSun /> : <FaMoon />}
     </button>
