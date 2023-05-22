@@ -1,9 +1,15 @@
 import './globals.css'
-import {Inter, Poppins} from 'next/font/google'
+import {Poppins} from 'next/font/google'
+import {Metadata} from "next";
+import {ReactNode} from "react";
+import {Providers} from "@/components/providers";
+import {Navigation} from "@/layout/navigation";
+import {NextFont} from "next/dist/compiled/@next/font";
+import {Footer} from "@/layout/footer";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"] })
+const poppins: NextFont = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"] })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Inspi.dev - Get inspiration from other developers',
   description: 'Ran out of ideas to work on as a developer? Get inspired by projects other developers made and shared at Inspi',
 }
@@ -11,11 +17,17 @@ export const metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={poppins.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+        <body className={`${poppins.className} bg-gray-50 dark:bg-zinc-800`}>
+          <Providers>
+            <Navigation />
+            {children}
+            <Footer />
+          </Providers>
+        </body>
     </html>
   )
 }
