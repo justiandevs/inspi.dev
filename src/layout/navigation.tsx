@@ -20,8 +20,8 @@ export const Navigation = (): ReactElement => {
           {/*  My likes*/}
           {/*  <span className="text-[0.75rem] font-semibold text-red-600 dark:text-red-400 -translate-y-1/2">366</span>*/}
           {/*</Link>*/}
-          <Link href="/login" className="hidden sm:flex transition duration-300 hover:text-indigo-700 hover:dark:text-indigo-500">
-            Login
+          <Link href="/signin" className="hidden sm:flex transition duration-300 hover:text-indigo-700 hover:dark:text-indigo-500">
+            Sign In
           </Link>
           <Link href="/projects" className="transition duration-300 hover:text-indigo-700 hover:dark:text-indigo-500 sm:hidden">
             Projects

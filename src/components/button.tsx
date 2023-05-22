@@ -2,7 +2,7 @@ import {ReactElement} from "react";
 import Link from "next/link";
 
 interface IButton {
-  url: string,
+  url?: string,
   name: string,
   type: "primary" | "secondary" | "danger",
   size?: "small" | "standard" | "large",
@@ -18,9 +18,17 @@ export const Button = ({
   form = false,
   stretch = false
 }: IButton): ReactElement => {
+  if(!form) {
+    return (
+      <Link type={form ? "submit" : ""} href={url!} className={`button ${type} ${size} ${stretch ? "w-full text-center" : ""}`}>
+        {name}
+      </Link>
+    )
+  }
+
   return (
-    <Link type="submit" href={url} className={`button ${type} ${size} ${stretch ? "w-full text-center" : ""}`}>
+    <button type={form ? "submit" : "button"} className={`button ${type} ${size} ${stretch ? "w-full text-center" : ""}`}>
       {name}
-    </Link>
+    </button>
   )
 }
