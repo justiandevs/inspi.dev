@@ -13,7 +13,7 @@ export const Button = ({
   name,
   type,
   size = "standard"
-                       }: IButton): ReactElement => {
+}: IButton): ReactElement => {
   return (
     <Link href={url} className={`button ${type} ${size}`}>
       {name}
