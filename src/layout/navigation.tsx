@@ -1,7 +1,7 @@
 import {ReactElement} from "react";
 import {ThemeToggle} from "@/layout/components/themeToggle";
 import Link from "next/link";
-import {FaMoon, FaPersonBooth, FaSun, FaUser} from "react-icons/fa";
+import {FaUser} from "react-icons/fa";
 
 export const Navigation = (): ReactElement => {
   return (
