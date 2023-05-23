@@ -1,11 +1,13 @@
 "use client";
 
-import {ReactElement} from "react";
+import {ReactElement, useState} from "react";
 import {Button} from "@/components/button";
 import Link from "next/link";
 import {SubmitHandler, useForm} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
+import {useSupabase} from "@/components/supabaseProvider";
+import {useRouter} from "next/navigation";
 
 const resetPasswordSchema = yup.object({
   password: yup.string().required().min(8),
@@ -15,10 +17,27 @@ const resetPasswordSchema = yup.object({
 type IPasswordReset = yup.InferType<typeof resetPasswordSchema>;
 
 export default function SignUp(): ReactElement {
+  const [error, setError] = useState<string>();
+
+  const { supabase } = useSupabase();
+  const router = useRouter();
+
   const { register, handleSubmit, formState: { errors }} = useForm<IPasswordReset>({
     resolver: yupResolver(resetPasswordSchema)
   });
-  const onSubmit: SubmitHandler<IPasswordReset> = data => console.log(data);
+  const onSubmit: SubmitHandler<IPasswordReset> = async (data) => {
+    await supabase.auth.updateUser({
+      password: data.password
+    })
+      .then((res) => {
+        if(res.error !== null) {
+          setError(res.error.message);
+          return;
+        }
+
+        router.push("/profile");
+      })
+  };
 
   return (
     <section className="container-bsc py-16">

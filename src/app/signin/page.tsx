@@ -36,7 +36,7 @@ export default function Login(): ReactElement {
           return;
         }
 
-        router.push("/dashboard");
+        router.push("/profile");
       });
   };
 
