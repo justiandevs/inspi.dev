@@ -3,8 +3,18 @@ import {Footer} from "../layout/footer";
 import {ReactElement} from "react";
 import Link from "next/link";
 import {Button} from "../components/button";
+import {createClient} from "@supabase/supabase-js";
+import {createServerComponentSupabaseClient} from "@supabase/auth-helpers-nextjs";
+import {cookies, headers} from "next/headers";
 
-export default function Home(): ReactElement {
+export default async function Home(): Promise<ReactElement> {
+  const supabase = createServerComponentSupabaseClient({
+    headers,
+    cookies
+  });
+
+  const { data: posts } = await supabase.from('posts').select();
+
   return (
     <main className="">
       {process.env.NEXT_PUBLIC_WORK_IN_PROGRESS === "true" ?
@@ -28,6 +38,9 @@ export default function Home(): ReactElement {
                 />
               </div>
             </div>
+          </section>
+          <section>
+            <pre>{JSON.stringify(posts, null, 2)}</pre>
           </section>
         </>
       }
