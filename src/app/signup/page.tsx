@@ -1,11 +1,12 @@
 "use client";
 
-import {ReactElement} from "react";
+import {ReactElement, useState} from "react";
 import {Button} from "@/components/button";
 import Link from "next/link";
 import {SubmitHandler, useForm} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
+import {useSupabase} from "@/components/supabaseProvider";
 
 const registerSchema = yup.object({
   email: yup.string().required().email(),
@@ -16,16 +17,31 @@ const registerSchema = yup.object({
 type IRegister = yup.InferType<typeof registerSchema>;
 
 export default function SignUp(): ReactElement {
+  const [error, setError] = useState<string>();
+
+  const { supabase } = useSupabase();
+
   const { register, handleSubmit, formState: { errors }} = useForm<IRegister>({
     resolver: yupResolver(registerSchema)
   });
-  const onSubmit: SubmitHandler<IRegister> = data => console.log(data);
+  const onSubmit: SubmitHandler<IRegister> = data => {
+    supabase.auth.signUp({
+      email: data.email,
+      password: data.password
+    }).then((res) => {
+      if(res.error !== null) {
+        setError(res.error.message);
+        return;
+      }
+    });
+  };
 
   return (
     <section className="container-bsc py-16">
       <div className="max-w-sm mx-auto">
         <h1 className="as-h3">Sign Up for Inspi</h1>
         <form className="flex flex-col gap-6 mt-8" onSubmit={handleSubmit(onSubmit)} >
+          {error ? <p className="text-red-500">{error}</p> : <></>}
           <div className="flex flex-col gap-2">
             <label className="text-[0.8rem]">Email address</label>
             <input

@@ -1,11 +1,13 @@
 "use client";
 
-import {ReactElement} from "react";
+import {ReactElement, useState} from "react";
 import {Button} from "@/components/button";
 import Link from "next/link";
 import {SubmitHandler, useForm} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
+import {useSupabase} from "@/components/supabaseProvider";
+import {useRouter} from "next/navigation";
 
 const loginSchema = yup.object({
   email: yup.string().required().email(),
@@ -15,16 +17,35 @@ const loginSchema = yup.object({
 type ILogin = yup.InferType<typeof loginSchema>;
 
 export default function Login(): ReactElement {
+  const [error, setError] = useState<string>();
+
+  const { supabase } = useSupabase();
+  const router = useRouter();
+
   const { register, handleSubmit, formState: { errors }} = useForm<ILogin>({
     resolver: yupResolver(loginSchema)
   });
-  const onSubmit: SubmitHandler<ILogin> = data => console.log(data);
+  const onSubmit: SubmitHandler<ILogin> = data => {
+    supabase.auth.signInWithPassword({
+      email: data.email,
+      password: data.password
+    })
+      .then((res) => {
+        if(res.error !== null) {
+          setError(res.error.message);
+          return;
+        }
+
+        router.push("/dashboard");
+      });
+  };
 
   return (
     <section className="container-bsc py-16">
       <div className="max-w-sm mx-auto">
         <h1 className="as-h3">Sign In to your account</h1>
         <form className="flex flex-col gap-6 mt-8" onSubmit={handleSubmit(onSubmit)} >
+          {error ? <p className="text-red-500">{error}</p> : <></>}
           <div className="flex flex-col gap-2">
             <label className="text-[0.8rem]">Email address</label>
             <input
