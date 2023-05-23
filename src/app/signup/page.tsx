@@ -24,8 +24,8 @@ export default function SignUp(): ReactElement {
   const { register, handleSubmit, formState: { errors }} = useForm<IRegister>({
     resolver: yupResolver(registerSchema)
   });
-  const onSubmit: SubmitHandler<IRegister> = data => {
-    supabase.auth.signUp({
+  const onSubmit: SubmitHandler<IRegister> = async (data) => {
+    await supabase.auth.signUp({
       email: data.email,
       password: data.password
     }).then((res) => {

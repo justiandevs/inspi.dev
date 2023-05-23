@@ -25,8 +25,8 @@ export default function Login(): ReactElement {
   const { register, handleSubmit, formState: { errors }} = useForm<ILogin>({
     resolver: yupResolver(loginSchema)
   });
-  const onSubmit: SubmitHandler<ILogin> = data => {
-    supabase.auth.signInWithPassword({
+  const onSubmit: SubmitHandler<ILogin> = async (data) => {
+    await supabase.auth.signInWithPassword({
       email: data.email,
       password: data.password
     })
