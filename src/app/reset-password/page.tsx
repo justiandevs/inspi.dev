@@ -2,7 +2,6 @@
 
 import {ReactElement, useState} from "react";
 import {Button} from "@/components/button";
-import Link from "next/link";
 import {SubmitHandler, useForm} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
