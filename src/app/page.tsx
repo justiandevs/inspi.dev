@@ -1,9 +1,6 @@
 import {WorkInProgress} from "@/components/workInProgress";
-import {Footer} from "../layout/footer";
 import {ReactElement} from "react";
-import Link from "next/link";
 import {Button} from "../components/button";
-import {createClient} from "@supabase/supabase-js";
 import {createServerComponentSupabaseClient} from "@supabase/auth-helpers-nextjs";
 import {cookies, headers} from "next/headers";
 
