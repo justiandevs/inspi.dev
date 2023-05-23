@@ -37,7 +37,7 @@ export default async function Home(): Promise<ReactElement> {
             </div>
           </section>
           <section>
-            <pre>{JSON.stringify(posts, null, 2)}</pre>
+            {/*<pre>{JSON.stringify(posts, null, 2)}</pre>*/}
           </section>
         </>
       }
