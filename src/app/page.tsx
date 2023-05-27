@@ -1,8 +1,8 @@
-import {WorkInProgress} from "@/components/workInProgress";
-import {ReactElement} from "react";
-import {Button} from "../components/button";
-import {createServerComponentSupabaseClient} from "@supabase/auth-helpers-nextjs";
-import {cookies, headers} from "next/headers";
+import { WorkInProgress } from "@/components/workInProgress";
+import { ReactElement } from "react";
+import { Button } from "../components/button";
+import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { cookies, headers } from "next/headers";
 
 export default async function Home(): Promise<ReactElement> {
   const supabase = createServerComponentSupabaseClient({
@@ -16,7 +16,7 @@ export default async function Home(): Promise<ReactElement> {
     <main className="">
       {process.env.NEXT_PUBLIC_WORK_IN_PROGRESS === "true" ?
         <WorkInProgress />
-          :
+        :
         <>
           <section className="bg-white dark:bg-zinc-800 py-16">
             <div className="container-bsc flex flex-col gap-4">
