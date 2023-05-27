@@ -18,7 +18,7 @@ export default async function Home(): Promise<ReactElement> {
         <WorkInProgress />
         :
         <>
-          <section className="bg-white dark:bg-zinc-800 py-16">
+          <section className="dark:bg-zinc-900 py-16">
             <div className="container-bsc flex flex-col gap-4">
               <h1>Ran out of ideas as a developer</h1>
               <p className="text-xl">Get inspired by projects or ideas that were made by other developers and shared at Inspi.</p>

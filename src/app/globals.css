@@ -1,67 +1,145 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+ 
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 6% 10%;
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+ 
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+ 
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --ring: 243 75% 59%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 240 4% 16%;
+    --foreground: 0 0% 98%;
+ 
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+ 
+    --popover: 224 71% 4%;
+    --popover-foreground: 215 20.2% 65.1%;
+ 
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+ 
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 1.2%;
+ 
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --accent: 216 34% 17%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --ring: 234 89% 74%;
+ 
+    --radius: 0.5rem;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
 
 /* layout */
 :root {
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .container-bsc {
-    @apply max-w-7xl mx-auto px-8 xl:px-0;
+  @apply max-w-7xl mx-auto px-8 xl:px-0;
 }
 
 /* standard styling */
 h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold;
+  @apply font-semibold;
 }
 
 
 h1, .as-h1 {
-    @apply text-5xl;
+  @apply text-5xl;
 }
 
 h2, .as-h2 {
-    @apply text-4xl;
+  @apply text-4xl;
 }
 
 h3, .as-h3 {
-    @apply text-3xl;
+  @apply text-3xl;
 }
 
 h4, .as-h4 {
-    @apply text-2xl;
+  @apply text-2xl;
 }
 
 h5, .as-h5 {
-    @apply text-xl;
+  @apply text-xl;
 }
 
 h6, .as-h6 {
-    @apply text-lg;
+  @apply text-lg;
 }
 
 a, p {
-    @apply text-base;
+  @apply text-base;
 }
 
 /* components */
 .button {
-    @apply transition duration-300;
+  @apply transition duration-300;
 }
 
 .button.primary {
-    @apply bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 hover:dark:bg-indigo-600 text-white rounded-lg;
+  @apply bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 hover:dark:bg-indigo-600 text-white rounded-lg;
 }
 
 .button.secondary {
-    @apply hover:bg-gray-100 hover:dark:bg-zinc-900 rounded-lg;
+  @apply hover:bg-gray-100 hover:dark:bg-zinc-900 rounded-lg;
 }
 
 .button.small {
-    @apply px-4 py-2;
+  @apply px-4 py-2;
 }
 
 .button.standard {
-    @apply p-4;
+  @apply p-4;
 }

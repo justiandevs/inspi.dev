@@ -3,6 +3,7 @@
 import {ReactElement} from "react";
 import {useTheme} from "next-themes";
 import {FaSun, FaMoon} from "react-icons/fa";
+import { Moon, Sun } from "lucide-react";
 
 export const ThemeToggle = (): ReactElement => {
   const { systemTheme, theme, setTheme } = useTheme();
@@ -11,9 +12,9 @@ export const ThemeToggle = (): ReactElement => {
   return (
     <button
       onClick={() => theme === "dark" ? setTheme("light") : setTheme("dark")}
-      className="transition duration hover:text-indigo-700 hover:dark:text-indigo-500"
+      className="transition duration-200 hover:text-indigo-600 hover:dark:text-indigo-400"
     >
-      {theme === "dark" ? <FaSun /> : <FaMoon />}
+      {theme === "dark" ? <Sun size={20} /> : <Moon size={20}/>}
     </button>
   )
 }
