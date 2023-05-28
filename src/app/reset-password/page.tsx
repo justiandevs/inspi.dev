@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useSupabase } from "@/providers/supabase-provider";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
+import { Loader2 } from "lucide-react";
 
 const resetPasswordSchema = yup.object({
   password: yup.string().required().min(8),
@@ -18,6 +19,7 @@ type IPasswordReset = yup.InferType<typeof resetPasswordSchema>;
 
 export default function ResetPassword(): ReactElement {
   const [error, setError] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { supabase } = useSupabase();
   const router = useRouter();
@@ -26,11 +28,14 @@ export default function ResetPassword(): ReactElement {
     resolver: yupResolver(resetPasswordSchema)
   });
   const onSubmit: SubmitHandler<IPasswordReset> = async (data) => {
+    setLoading(true);
+
     await supabase.auth.updateUser({
       password: data.password
     })
       .then((res) => {
         if (res.error !== null) {
+          setLoading(false);
           setError(res.error.message);
           return;
         }
@@ -64,11 +69,15 @@ export default function ResetPassword(): ReactElement {
           </div>
           <div className="flex">
             <Button
+              disabled={loading}
               name="Reset password"
               type="submit"
               className="w-full"
             >
               Reset password
+              {loading &&
+                <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+              }
             </Button>
           </div>
         </form>

@@ -8,6 +8,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSupabase } from "@/providers/supabase-provider";
 import { Input } from "@/components/ui/input";
+import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const registerSchema = yup.object({
   email: yup.string().required().email(),
@@ -19,21 +21,29 @@ type IRegister = yup.InferType<typeof registerSchema>;
 
 export default function SignUp(): ReactElement {
   const [error, setError] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { supabase } = useSupabase();
+  const router = useRouter();
 
   const { register, handleSubmit, formState: { errors } } = useForm<IRegister>({
     resolver: yupResolver(registerSchema)
   });
+
   const onSubmit: SubmitHandler<IRegister> = async (data) => {
+    setLoading(true);
+
     await supabase.auth.signUp({
       email: data.email,
       password: data.password
     }).then((res) => {
       if (res.error !== null) {
+        setLoading(false);
         setError(res.error.message);
         return;
       }
+
+      router.push("/signin");
     });
   };
 
@@ -72,11 +82,15 @@ export default function SignUp(): ReactElement {
           </div>
           <div className="flex">
             <Button
+              disabled={loading}
               name="Sign Up"
               className="w-full"
               type="submit"
             >
               Sign Up
+              {loading &&
+                <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+              }
             </Button>
           </div>
         </form>

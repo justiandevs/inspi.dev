@@ -10,6 +10,7 @@ import {useSupabase} from "@/providers/supabase-provider";
 import {useRouter} from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 const loginSchema = yup.object({
   email: yup.string().required().email(),
@@ -20,6 +21,7 @@ type ILogin = yup.InferType<typeof loginSchema>;
 
 export default function Login(): ReactElement {
   const [error, setError] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { supabase } = useSupabase();
   const router = useRouter();
@@ -28,12 +30,15 @@ export default function Login(): ReactElement {
     resolver: yupResolver(loginSchema)
   });
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
+    setLoading(true);
+
     await supabase.auth.signInWithPassword({
       email: data.email,
       password: data.password
     })
       .then((res) => {
         if(res.error !== null) {
+          setLoading(false);
           setError(res.error.message);
           return;
         }
@@ -73,11 +78,15 @@ export default function Login(): ReactElement {
           </div>
           <div className="flex">
             <Button
+              disabled={loading}
               name="Sign In"
               className="w-full"
               type="submit"
             >
               Sign In  
+              {loading &&
+                <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+              }
             </Button>
           </div>
         </form>

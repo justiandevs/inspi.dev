@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSupabase } from "@/providers/supabase-provider";
 import { Input } from "@/components/ui/input";
+import { Loader2 } from "lucide-react";
 
 const forgotPasswordSchema = yup.object({
   email: yup.string().required().email(),
@@ -16,6 +17,7 @@ type IForgotPassword = yup.InferType<typeof forgotPasswordSchema>;
 
 export default function ForgotPassword(): ReactElement {
   const [status, setStatus] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { supabase } = useSupabase();
 
@@ -23,10 +25,13 @@ export default function ForgotPassword(): ReactElement {
     resolver: yupResolver(forgotPasswordSchema)
   });
   const onSubmit: SubmitHandler<IForgotPassword> = async (data) => {
+    setLoading(true);
+
     await supabase.auth.resetPasswordForEmail(data.email, {
       redirectTo: process.env.NEXT_PUBLIC_RESET_PASSWORD_URL
     })
       .then((res) => {
+        setLoading(false);
         setStatus("If there is an account known by us with your email we will send you a reset password mail in a few minutes.");
       });
   };
@@ -48,11 +53,15 @@ export default function ForgotPassword(): ReactElement {
           </div>
           <div className="flex">
             <Button
+              disabled={loading}
               name="Send password reset mail"
               type="submit"
               className="w-full"
             >
               Request a password reset
+              {loading &&
+                <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+              }
             </Button>
           </div>
         </form>
