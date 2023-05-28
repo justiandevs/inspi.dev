@@ -1,11 +1,12 @@
 "use client";
 
-import {ReactElement, useState} from "react";
-import {Button} from "@/components/button";
-import {SubmitHandler, useForm} from "react-hook-form";
+import { ReactElement, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {useSupabase} from "@/components/supabaseProvider";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useSupabase } from "@/components/supabaseProvider";
+import { Input } from "@/components/ui/input";
 
 const forgotPasswordSchema = yup.object({
   email: yup.string().required().email(),
@@ -13,12 +14,12 @@ const forgotPasswordSchema = yup.object({
 
 type IForgotPassword = yup.InferType<typeof forgotPasswordSchema>;
 
-export default function SignUp(): ReactElement {
+export default function ForgotPassword(): ReactElement {
   const [status, setStatus] = useState<string>();
 
   const { supabase } = useSupabase();
 
-  const { register, handleSubmit, formState: { errors }} = useForm<IForgotPassword>({
+  const { register, handleSubmit, formState: { errors } } = useForm<IForgotPassword>({
     resolver: yupResolver(forgotPasswordSchema)
   });
   const onSubmit: SubmitHandler<IForgotPassword> = async (data) => {
@@ -38,9 +39,8 @@ export default function SignUp(): ReactElement {
           {status ? <p className="text-green-500">{status}</p> : <></>}
           <div className="flex flex-col gap-2">
             <label className="text-[0.8rem]">Email address</label>
-            <input
+            <Input
               {...register("email")}
-              className="rounded-lg border border-gray-200 py-2 dark:bg-zinc-900 dark:border-zinc-800"
               type="text"
               placeholder="Your email address"
             />
@@ -49,11 +49,11 @@ export default function SignUp(): ReactElement {
           <div className="flex">
             <Button
               name="Send password reset mail"
-              type="primary"
-              size="small"
-              form={true}
-              stretch={true}
-            />
+              type="submit"
+              className="w-full"
+            >
+              Request a password reset
+            </Button>
           </div>
         </form>
       </div>
