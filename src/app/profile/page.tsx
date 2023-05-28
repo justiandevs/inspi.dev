@@ -5,7 +5,7 @@ export default async function Profile(): Promise<ReactElement> {
   await protectThisRouteForUnauthenticatedUsers();
 
   return (
-    <section className="py-16 dark:bg-zinc-800 bg-white">
+    <section className="py-16">
       <div className="container-bsc">
         <h1>Profile</h1>
       </div>
