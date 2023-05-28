@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown"
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogOut, PlusCircle, Settings, User } from "lucide-react";
+import { Heart, LogOut, PlusCircle, Settings, User } from "lucide-react";
 import { getSignedInUserProfile } from "@/services/profile";
 import Link from "next/link";
 import { Logout } from "./logout";
@@ -46,6 +46,12 @@ export const UserNav = async (): Promise<ReactElement> => {
               <span>Profile</span>
             </DropdownMenuItem>
           </Link>
+          <Link href="/profile/likes">
+            <DropdownMenuItem       >
+              <Heart className="mr-2 h-4 w-4" />
+              <span>Likes <span className="text-primary font-medium">128</span></span>
+            </DropdownMenuItem>
+          </Link>
           <Link href="/profile/settings">
             <DropdownMenuItem>
               <Settings className="mr-2 h-4 w-4" />
@@ -53,10 +59,10 @@ export const UserNav = async (): Promise<ReactElement> => {
             </DropdownMenuItem>
           </Link>
           <Link href="/projects/add">
-          <DropdownMenuItem>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            <span>New Project</span>
-          </DropdownMenuItem>
+            <DropdownMenuItem>
+              <PlusCircle className="mr-2 h-4 w-4" />
+              <span>New Project</span>
+            </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

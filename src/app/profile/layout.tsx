@@ -14,6 +14,9 @@ export default function ProfileLayout({ children }: { children: ReactNode }): Re
           <Link href="/profile" className="text-md transition duration-200 opacity-60 hover:opacity-100 dark:opacity-80 hover:dark:opacity-100 md:px-3 md:-ml-3 hover:bg-zinc-100 dark:hover:bg-zinc-800 py-2 rounded-lg">
             Profile
           </Link>
+          <Link href="/profile/likes" className="text-md transition duration-200 opacity-60 hover:opacity-100 dark:opacity-80 hover:dark:opacity-100 md:px-3 md:-ml-3 hover:bg-zinc-100 dark:hover:bg-zinc-800 py-2 rounded-lg">
+            Likes
+          </Link>
           <Link href="/profile/settings" className="text-md transition duration-200 opacity-60 hover:opacity-100 dark:opacity-80 hover:dark:opacity-100 md:px-3 md:-ml-3 hover:bg-zinc-100 dark:hover:bg-zinc-800 py-2 rounded-lg">
             Settings
           </Link>
