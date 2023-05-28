@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useSupabase } from "@/providers/supabase-provider";
 import { Variants, motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
-import { LogIn, LogOut, Menu, X } from "lucide-react";
+import { LogIn, Menu, X } from "lucide-react";
 
 interface NavigationProps {
   children: ReactNode
@@ -22,13 +22,9 @@ const variants: Variants = {
 }
 
 export const Navigation = ({ children }: NavigationProps): ReactElement => {
-  const { session, supabase } = useSupabase();
+  const { session } = useSupabase();
   const [isOpen, setIsOpen] = useState<Boolean>(false);
   const navigation = useRef<HTMLDivElement>(null);
-
-  const signOut = async () => {
-    await supabase.auth.signOut();
-  };
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -79,10 +75,6 @@ export const Navigation = ({ children }: NavigationProps): ReactElement => {
               :
               <>
                 {children}
-                <button onClick={() => signOut()}
-                  className="transition duration-200 hover:text-indigo-600 hover:dark:text-indigo-400">
-                  <LogOut size={20} />
-                </button>
               </>
             }
             <ThemeToggle />

@@ -9,7 +9,5 @@ export const getSignedInUserProfile = async () => {
 
     const { data: profile, error } = await supabase.from("profiles").select("*").eq('id', (await supabase.auth.getUser()).data.user?.id).single();
 
-    console.log(profile);
-
     return profile;
 }
