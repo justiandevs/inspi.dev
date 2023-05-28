@@ -13,7 +13,7 @@ export default async function Profile(): Promise<ReactElement> {
   return (
     <div className="rounded-lg border">
       <div className="rounded-t-lg bg-white dark:bg-zinc-800 p-16 md:p-12 text-center">
-        <h2 className="as-h4">{profile?.username}'s profile</h2>
+        <h2 className="as-h4">{profile?.username} profile</h2>
       </div>
       <div className="flex md:block items-center w-full justify-center md:px-8">
         <Image src={profile?.avatar_url} width={100} height={100} alt={profile?.username} className="aspect-square object-cover rounded-lg -translate-y-1/2 col-span-1" />
@@ -38,7 +38,7 @@ export default async function Profile(): Promise<ReactElement> {
               Add project
             </Button>
           </div>
-          <p className="opacity-60">We haven't found any project.</p>
+          <p className="opacity-60">We have not found any project.</p>
         </div>
       </div>
     </div>
