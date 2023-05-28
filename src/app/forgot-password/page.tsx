@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useSupabase } from "@/components/supabaseProvider";
+import { useSupabase } from "@/providers/supabase-provider";
 import { Input } from "@/components/ui/input";
 
 const forgotPasswordSchema = yup.object({

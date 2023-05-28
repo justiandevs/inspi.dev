@@ -2,13 +2,13 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { Metadata } from "next";
 import { ReactNode } from "react";
-import { Providers } from "@/components/providers";
+import { Providers } from "@/providers/theme-provider";
 import { Navigation } from "../layout/navigation";
 import { NextFont } from "next/dist/compiled/@next/font";
 import { Footer } from "../layout/footer";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
-import SupabaseProvider from "@/components/supabaseProvider";
+import SupabaseProvider from '@/providers/supabase-provider';
 
 const inter: NextFont = Inter({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"] })
 

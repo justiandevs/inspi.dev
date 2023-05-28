@@ -1,12 +1,13 @@
 "use client";
 
-import {ReactElement, useState} from "react";
-import {Button} from "@/components/button";
+import { ReactElement, useState } from "react";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import {SubmitHandler, useForm} from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {useSupabase} from "@/components/supabaseProvider";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useSupabase } from "@/providers/supabase-provider";
+import { Input } from "@/components/ui/input";
 
 const registerSchema = yup.object({
   email: yup.string().required().email(),
@@ -21,7 +22,7 @@ export default function SignUp(): ReactElement {
 
   const { supabase } = useSupabase();
 
-  const { register, handleSubmit, formState: { errors }} = useForm<IRegister>({
+  const { register, handleSubmit, formState: { errors } } = useForm<IRegister>({
     resolver: yupResolver(registerSchema)
   });
   const onSubmit: SubmitHandler<IRegister> = async (data) => {
@@ -29,7 +30,7 @@ export default function SignUp(): ReactElement {
       email: data.email,
       password: data.password
     }).then((res) => {
-      if(res.error !== null) {
+      if (res.error !== null) {
         setError(res.error.message);
         return;
       }
@@ -40,13 +41,12 @@ export default function SignUp(): ReactElement {
     <section className="container-bsc py-16">
       <div className="max-w-sm mx-auto">
         <h1 className="as-h3">Sign Up for Inspi</h1>
-        <form className="flex flex-col gap-6 mt-8" onSubmit={handleSubmit(onSubmit)} >
+        <form className="flex flex-col gap-4 mt-8" onSubmit={handleSubmit(onSubmit)} >
           {error ? <p className="text-red-500">{error}</p> : <></>}
           <div className="flex flex-col gap-2">
             <label className="text-[0.8rem]">Email address</label>
-            <input
+            <Input
               {...register("email")}
-              className="rounded-lg border border-gray-200 py-2 dark:bg-zinc-900 dark:border-zinc-800"
               type="text"
               placeholder="Your email address"
             />
@@ -54,9 +54,8 @@ export default function SignUp(): ReactElement {
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-[0.8rem]">Password</label>
-            <input
+            <Input
               {...register("password")}
-              className="rounded-lg border border-gray-200 py-2 dark:bg-zinc-900 dark:border-zinc-800"
               type="password"
               placeholder="Your password"
             />
@@ -64,9 +63,8 @@ export default function SignUp(): ReactElement {
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-[0.8rem]">Confirm password</label>
-            <input
+            <Input
               {...register("verifyPassword")}
-              className="rounded-lg border border-gray-200 py-2 dark:bg-zinc-900 dark:border-zinc-800"
               type="password"
               placeholder="Confirm your password"
             />
@@ -75,14 +73,14 @@ export default function SignUp(): ReactElement {
           <div className="flex">
             <Button
               name="Sign Up"
-              type="primary"
-              size="small"
-              form={true}
-              stretch={true}
-            />
+              className="w-full"
+              type="submit"
+            >
+              Sign Up
+            </Button>
           </div>
         </form>
-        <p className="mt-8 text-center">Already a member? <Link className="font-medium text-indigo-600 dark:text-indigo-500 hover:dark:text-indigo-600 hover:text-indigo-700" href={"/signin"}>Sign In</Link></p>
+        <p className="mt-8 text-center">Already a member? <Link className="font-medium text-indigo-600 dark:text-indigo-400 hover:dark:text-indigo-500 hover:text-indigo-700" href={"/signin"}>Sign In</Link></p>
       </div>
     </section>
   )

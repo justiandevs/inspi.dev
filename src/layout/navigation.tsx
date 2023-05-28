@@ -1,9 +1,9 @@
 "use client";
 
 import React, { ReactElement, useEffect, useRef, useState } from "react";
-import { ThemeToggle } from "@/layout/components/themeToggle";
+import { ThemeToggle } from "@/layout/components/theme-toggle";
 import Link from "next/link";
-import { useSupabase } from "@/components/supabaseProvider";
+import { useSupabase } from "@/providers/supabase-provider";
 import { Variant, Variants, motion } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Cross, LogIn, LogOut, Menu, Plus, User, X } from "lucide-react";

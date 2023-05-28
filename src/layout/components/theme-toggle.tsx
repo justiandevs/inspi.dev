@@ -2,7 +2,6 @@
 
 import {ReactElement} from "react";
 import {useTheme} from "next-themes";
-import {FaSun, FaMoon} from "react-icons/fa";
 import { Moon, Sun } from "lucide-react";
 
 export const ThemeToggle = (): ReactElement => {

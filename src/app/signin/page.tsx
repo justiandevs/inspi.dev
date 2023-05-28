@@ -1,13 +1,15 @@
 "use client";
 
 import {ReactElement, useState} from "react";
-import {Button} from "@/components/button";
+// import {Button} from "@/components/button";
 import Link from "next/link";
 import {SubmitHandler, useForm} from "react-hook-form";
 import * as yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {useSupabase} from "@/components/supabaseProvider";
+import {useSupabase} from "@/providers/supabase-provider";
 import {useRouter} from "next/navigation";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const loginSchema = yup.object({
   email: yup.string().required().email(),
@@ -48,9 +50,8 @@ export default function Login(): ReactElement {
           {error ? <p className="text-red-500">{error}</p> : <></>}
           <div className="flex flex-col gap-2">
             <label className="text-[0.8rem]">Email address</label>
-            <input
+            <Input
               {...register("email")}
-              className="rounded-lg border border-gray-200 py-2 dark:bg-zinc-900 dark:border-zinc-800"
               type="text"
               placeholder="Your email address"
             />
@@ -59,13 +60,12 @@ export default function Login(): ReactElement {
           <div className="flex flex-col gap-2">
             <div className="flex flex-row justify-between items-center">
               <label className="text-[0.8rem]">Password</label>
-              <Link href="/forgot-password" className="transition duration-300 text-[0.8rem] text-indigo-600 hover:text-indigo-700 dark:text-indigo-500 hover:dark:text-indigo-600 font-medium">
+              <Link href="/forgot-password" className="transition duration-300 text-[0.8rem] text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 hover:dark:text-indigo-500 font-medium">
                 Forgot password?
               </Link>
             </div>
-            <input
+            <Input
               {...register("password")}
-              className="rounded-lg border border-gray-200 py-2 dark:bg-zinc-900 dark:border-zinc-800"
               type="password"
               placeholder="Your password"
             />
@@ -74,14 +74,14 @@ export default function Login(): ReactElement {
           <div className="flex">
             <Button
               name="Sign In"
-              type="primary"
-              size="small"
-              form={true}
-              stretch={true}
-            />
+              className="w-full"
+              type="submit"
+            >
+              Sign In  
+            </Button>
           </div>
         </form>
-        <p className="mt-8 text-center">Not a member? <Link className="font-medium text-indigo-600 dark:text-indigo-500 hover:dark:text-indigo-600 hover:text-indigo-700" href={"/signup"}>Sign Up</Link></p>
+        <p className="mt-8 text-center">Not a member? <Link className="font-medium text-indigo-600 dark:text-indigo-400 hover:dark:text-indigo-500 hover:text-indigo-700" href={"/signup"}>Sign Up</Link></p>
       </div>
     </section>
   )

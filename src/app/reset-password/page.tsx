@@ -1,12 +1,13 @@
 "use client";
 
-import {ReactElement, useState} from "react";
-import {Button} from "@/components/button";
-import {SubmitHandler, useForm} from "react-hook-form";
+import { ReactElement, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import {yupResolver} from "@hookform/resolvers/yup";
-import {useSupabase} from "@/components/supabaseProvider";
-import {useRouter} from "next/navigation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useSupabase } from "@/providers/supabase-provider";
+import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
 
 const resetPasswordSchema = yup.object({
   password: yup.string().required().min(8),
@@ -15,13 +16,13 @@ const resetPasswordSchema = yup.object({
 
 type IPasswordReset = yup.InferType<typeof resetPasswordSchema>;
 
-export default function SignUp(): ReactElement {
+export default function ResetPassword(): ReactElement {
   const [error, setError] = useState<string>();
 
   const { supabase } = useSupabase();
   const router = useRouter();
 
-  const { register, handleSubmit, formState: { errors }} = useForm<IPasswordReset>({
+  const { register, handleSubmit, formState: { errors } } = useForm<IPasswordReset>({
     resolver: yupResolver(resetPasswordSchema)
   });
   const onSubmit: SubmitHandler<IPasswordReset> = async (data) => {
@@ -29,7 +30,7 @@ export default function SignUp(): ReactElement {
       password: data.password
     })
       .then((res) => {
-        if(res.error !== null) {
+        if (res.error !== null) {
           setError(res.error.message);
           return;
         }
@@ -45,9 +46,8 @@ export default function SignUp(): ReactElement {
         <form className="flex flex-col gap-6 mt-8" onSubmit={handleSubmit(onSubmit)} >
           <div className="flex flex-col gap-2">
             <label className="text-[0.8rem]">Password</label>
-            <input
+            <Input
               {...register("password")}
-              className="rounded-lg border border-gray-200 py-2 dark:bg-zinc-900 dark:border-zinc-800"
               type="password"
               placeholder="Your password"
             />
@@ -55,9 +55,8 @@ export default function SignUp(): ReactElement {
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-[0.8rem]">Confirm password</label>
-            <input
+            <Input
               {...register("verifyPassword")}
-              className="rounded-lg border border-gray-200 py-2 dark:bg-zinc-900 dark:border-zinc-800"
               type="password"
               placeholder="Confirm your password"
             />
@@ -66,11 +65,11 @@ export default function SignUp(): ReactElement {
           <div className="flex">
             <Button
               name="Reset password"
-              type="primary"
-              size="small"
-              form={true}
-              stretch={true}
-            />
+              type="submit"
+              className="w-full"
+            >
+              Reset password
+            </Button>
           </div>
         </form>
       </div>
