@@ -51,6 +51,32 @@ export interface Database {
           title?: string
         }
       }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          biography: string | null
+          id: string
+          updated_at: string | null
+          username: string | null
+          website: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          biography?: string | null
+          id: string
+          updated_at?: string | null
+          username?: string | null
+          website?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          biography?: string | null
+          id?: string
+          updated_at?: string | null
+          username?: string | null
+          website?: string | null
+        }
+      }
     }
     Views: {
       [_ in never]: never

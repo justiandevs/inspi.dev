@@ -9,6 +9,7 @@ import { Footer } from "../layout/footer";
 import { createServerComponentSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { cookies, headers } from "next/headers";
 import SupabaseProvider from '@/providers/supabase-provider';
+import { Profile } from '@/layout/components/profile';
 
 const inter: NextFont = Inter({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800"] })
 
@@ -36,7 +37,10 @@ export default async function RootLayout({
       <body className={`${inter.className} bg-gray-50 dark:bg-zinc-900`}>
         <SupabaseProvider session={session}>
           <Providers>
-            <Navigation />
+            <Navigation>
+              {/* @ts-expect-error Async Server Component */}
+              <Profile />
+            </Navigation>
             {children}
             <Footer />
           </Providers>
