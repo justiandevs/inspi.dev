@@ -16,9 +16,10 @@ interface SettingsProps {
   schema: "siteResetSchema" | "biographyResetSchema" | "usernameResetSchema"
   placeholder: string,
   field: "website" | "biography" | "avatar_url" | "username"
+  isTextarea?: boolean
 }
 
-export const SettingsComponent = ({ defaultValue, schema, placeholder, field }: SettingsProps): ReactElement => {
+export const SettingsComponent = ({ defaultValue, schema, placeholder, field, isTextarea = false }: SettingsProps): ReactElement => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>();
 
@@ -66,16 +67,26 @@ export const SettingsComponent = ({ defaultValue, schema, placeholder, field }: 
   return (
     <form className="flex flex-col gap-2 items-start" onSubmit={handleSubmit(onSubmit)}>
       <p className="text-[0.8rem] text-red-500">{error}</p>
-      <Input
-        {...register("field")}
-        placeholder={placeholder}
-        defaultValue={defaultValue}
-      />
+      {isTextarea ?
+        <Textarea
+          {...register("field")}
+          placeholder={placeholder}
+          defaultValue={defaultValue}
+        />
+        :
+        <>
+          <Input
+            {...register("field")}
+            placeholder={placeholder}
+            defaultValue={defaultValue}
+            type={"text"}
+          />
+        </>
+      }
       <p className="text-[0.8rem] text-red-500">{errors.field?.message}</p>
       <Button
         disabled={loading}
         type="submit"
-
       >
         Change {field}
         {loading &&
