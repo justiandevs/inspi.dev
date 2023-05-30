@@ -1,7 +1,10 @@
 import Link from "next/link"
 import { ReactElement, ReactNode } from "react"
+import {protectThisRouteForUnauthenticatedUsers} from "../../../lib/protected-routes";
 
-export default function ProfileLayout({ children }: { children: ReactNode }): ReactElement {
+export default async function ProfileLayout({ children }: { children: ReactNode }): Promise<ReactElement> {
+  await protectThisRouteForUnauthenticatedUsers();
+
   return (
     <>
       <section className="py-12 border-b">

@@ -1,12 +1,10 @@
 import { ReactElement } from "react";
-import { protectThisRouteForUnauthenticatedUsers } from "../../../../lib/protected-routes";
 import { getSignedInUserProfile } from "@/services/profile";
 import {SettingsComponent} from "@/app/profile/settings/settings";
 import {PasswordSettingsComponent} from "@/app/profile/settings/password-settings";
 import {UploadSettingsComponent} from "@/app/profile/settings/upload-settings";
 
 export default async function Settings (): Promise<ReactElement> {
-  await protectThisRouteForUnauthenticatedUsers();
   const profile = await getSignedInUserProfile();
 
   return (

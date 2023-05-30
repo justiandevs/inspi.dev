@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import { protectThisRouteForUnauthenticatedUsers } from "../../../lib/protected-routes";
 import { getSignedInUserProfile } from "@/services/profile";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -7,7 +6,6 @@ import { Laptop } from "lucide-react";
 import Link from "next/link";
 
 export default async function Profile(): Promise<ReactElement> {
-  await protectThisRouteForUnauthenticatedUsers();
   const profile = await getSignedInUserProfile();
 
   return (
