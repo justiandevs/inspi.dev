@@ -86,6 +86,7 @@ export const UploadSettingsComponent = (): ReactElement => {
 
     setLoading(false);
     router.push('/profile');
+    router.refresh();
   };
 
   return (
