@@ -16,6 +16,10 @@ export default async function Settings (): Promise<ReactElement> {
         <SettingsComponent defaultValue={profile?.username} schema={"usernameResetSchema"} placeholder={"Your username"} field={"username"} />
       </div>
       <div className="rounded-lg border p-8">
+        <h2 className="as-h5 mb-4">New avatar</h2>
+        <UploadSettingsComponent />
+      </div>
+      <div className="rounded-lg border p-8">
         <h2 className="as-h5 mb-4">Your biography</h2>
         <SettingsComponent defaultValue={profile?.biography} schema={"biographyResetSchema"} placeholder={"Your biography"} field={"biography"} isTextarea />
       </div>
@@ -26,10 +30,6 @@ export default async function Settings (): Promise<ReactElement> {
       <div className="rounded-lg border p-8">
         <h2 className="as-h5 mb-4">Your password</h2>
         <PasswordSettingsComponent placeholder={"Your password"} />
-      </div>
-      <div className="rounded-lg border p-8">
-        <h2 className="as-h5 mb-4">New avatar</h2>
-        <UploadSettingsComponent />
       </div>
     </div>
   )
